@@ -6,122 +6,126 @@
     <title>Interactive Map with Locations</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f6f9;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-        h2 {
-            color: #333;
-            font-size: 30px;
-            margin: 20px 0;
-            font-weight: 600;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #eef2f7;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-        .input-container {
-            margin: 15px auto;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+h2 {
+    color: #333;
+    font-size: 32px;
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
 
-        #locationInput {
-            padding: 12px;
-            width: 300px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-            background: #fff;
-        }
+.input-container {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
-        #locationInput:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
-        }
+#locationInput {
+    padding: 14px;
+    width: 320px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+    background: #fff;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+}
 
-        #addLocationButton {
-            padding: 12px 18px;
-            border: none;
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-        }
+#locationInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
 
-        #addLocationButton:hover {
-            background: linear-gradient(135deg, #0056b3, #003d80);
-            transform: translateY(-2px);
-        }
+#addLocationButton {
+    padding: 14px 20px;
+    border: none;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
 
+#addLocationButton:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    transform: translateY(-3px);
+}
 
-        #map {
-            height: 500px;
-            width: 90%;
-            max-width: 1000px;
-            margin: 20px auto;
-            border-radius: 12px;
-            border: 2px solid #ddd;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
-        }
+#map {
+    height: 500px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 25px auto;
+    border-radius: 12px;
+    border: 2px solid #ddd;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 900px;
-        }
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+}
 
-        li {
-            cursor: pointer;
-            padding: 12px 18px;
-            background: #ffffff;
-            margin: 8px;
-            display: inline-block;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
+li {
+    cursor: pointer;
+    padding: 12px 20px;
+    background: #ffffff;
+    margin: 10px;
+    display: inline-block;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+}
 
-        li:hover {
-            background: #007bff;
-            color: white;
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
-        }
-        @media (max-width: 768px) {
-            .input-container {
-                flex-direction: column;
-                align-items: center;
-            }
+li:hover {
+    background: #007bff;
+    color: white;
+    transform: scale(1.08);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
+}
 
-            #locationInput {
-                width: 85%;
-            }
+@media (max-width: 768px) {
+    .input-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-            #addLocationButton {
-                width: 90%;
-            }
+    #locationInput {
+        width: 85%;
+    }
 
-            #map {
-                height: 400px;
-            }
-        }
+    #addLocationButton {
+        width: 90%;
+    }
+
+    #map {
+        height: 400px;
+    }
+}
     </style>
 </head>
 <body>
@@ -141,7 +145,6 @@
         let locationsArray = [];
         let map;
 
-        // Initialize the map
         function initializeMap() {
             map = L.map("map").setView([10, 122], 5); // Default view
             L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -198,7 +201,6 @@
             return [lat, lng];
         }
 
-        // Load the map on page load
         window.onload = initializeMap;
     </script>
 
